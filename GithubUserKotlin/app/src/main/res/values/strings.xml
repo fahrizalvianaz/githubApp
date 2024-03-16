@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Society</string>
+    <string name="follower_tittle">Followers :</string>
+    <string name="follower">followers</string>
+    <string name="following_tittle">Following :</string>
+    <string name="following">following</string>
+    <string name="nama">nama</string>
+    <string name="username">Username</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tab_text_1">Followers</string>
+    <string name="tab_text_2">Following</string>
+    <string name="search_hint">masukkan username</string>
+    <string name="followers">Followers</string>
+    <string name="favorite_button">fab favorite</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="society">SOCIETY</string>
+    <string name="created_by">Created by :</string>
+    <string name="fahrizal_shofyan_aziz">Fahrizal Shofyan Aziz</string>
+    <string name="fahrizalshofyanaziz_gmail_com">fahrizalshofyanaziz@gmail.com</string>
+</resources>
