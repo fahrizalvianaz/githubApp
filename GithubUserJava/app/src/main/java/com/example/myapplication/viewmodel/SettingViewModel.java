@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel;
 import com.example.myapplication.data.local.datastore.SettingPreferences;
 
 public class SettingViewModel extends ViewModel {
-    private SettingPreferences preferences;
+    private final SettingPreferences preferences;
 
     public SettingViewModel(SettingPreferences preferences) {
         this.preferences = preferences;

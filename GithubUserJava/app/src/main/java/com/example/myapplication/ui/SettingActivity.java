@@ -1,22 +1,15 @@
 package com.example.myapplication.ui;
 
-import static android.app.PendingIntent.getActivity;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.datastore.core.DataStore;
-import androidx.datastore.preferences.core.Preferences;
 import com.example.myapplication.R;
 import com.example.myapplication.data.local.datastore.SettingPreferences;
-import com.example.myapplication.databinding.ActivitySettingBinding;
 import com.example.myapplication.factory.SettingViewModelFactory;
 import com.example.myapplication.viewmodel.SettingViewModel;
 import com.google.android.material.switchmaterial.SwitchMaterial;

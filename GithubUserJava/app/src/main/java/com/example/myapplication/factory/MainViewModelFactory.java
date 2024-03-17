@@ -8,11 +8,7 @@ import com.example.myapplication.viewmodel.MainViewModel;
 
 public class MainViewModelFactory extends ViewModelProvider.NewInstanceFactory {
 
-//    private final SettingPreferences pref;
 
-//    public MainViewModelFactory(SettingPreferences pref) {
-//        this.pref = pref;
-//    }
     public MainViewModelFactory() {
 
     }

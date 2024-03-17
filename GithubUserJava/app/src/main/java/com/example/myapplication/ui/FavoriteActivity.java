@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.myapplication.adapter.FavoriteAdapter;
-import com.example.myapplication.data.local.entity.FavoriteEntity;
 import com.example.myapplication.databinding.ActivityFavoriteBinding;
 import com.example.myapplication.factory.FavoriteViewModelFactory;
 import com.example.myapplication.viewmodel.FavoriteViewModel;
@@ -44,13 +43,10 @@ public class FavoriteActivity extends AppCompatActivity {
         binding.rvFavorite.addItemDecoration(itemDecoration);
         binding.rvFavorite.setAdapter(adapter);
 
-        adapter.setOnItemClickCallback(new FavoriteAdapter.OnItemClickCallback() {
-            @Override
-            public void onItemClicked(FavoriteEntity favEntity) {
-                Intent intent = new Intent(FavoriteActivity.this, DetailActivity.class);
-                intent.putExtra(DetailActivity.KEY_USERNAME, favEntity.getUsername());
-                startActivity(intent);
-            }
+        adapter.setOnItemClickCallback(favEntity -> {
+            Intent intent = new Intent(FavoriteActivity.this, DetailActivity.class);
+            intent.putExtra(DetailActivity.KEY_USERNAME, favEntity.getUsername());
+            startActivity(intent);
         });
     }
 

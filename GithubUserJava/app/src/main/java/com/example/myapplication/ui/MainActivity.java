@@ -8,8 +8,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
-import android.content.Context;
+
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -22,10 +21,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.myapplication.R;
 import com.example.myapplication.adapter.UserAdapter;
+import com.example.myapplication.data.local.datastore.SettingPreferences;
 import com.example.myapplication.data.remote.response.ItemsItem;
 import com.example.myapplication.databinding.ActivityMainBinding;
 import com.example.myapplication.factory.MainViewModelFactory;
+import com.example.myapplication.factory.SettingViewModelFactory;
 import com.example.myapplication.viewmodel.MainViewModel;
+import com.example.myapplication.viewmodel.SettingViewModel;
 
 
 import java.util.List;
@@ -34,12 +36,14 @@ import java.util.stream.Collectors;
 public class MainActivity extends AppCompatActivity implements MenuItem.OnMenuItemClickListener {
 
     private ActivityMainBinding binding;
-//
-////    private final RxDataStore<Preferences> dataStore = new RxPreferenceDataStoreBuilder(MainActivity.this, "settings")
-//            .build();
+    private SettingViewModel viewModel;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -47,19 +51,19 @@ public class MainActivity extends AppCompatActivity implements MenuItem.OnMenuIt
         binding.rvItem.setLayoutManager(layoutManager);
         DividerItemDecoration itemDecoration = new DividerItemDecoration(this, layoutManager.getOrientation());
         binding.rvItem.addItemDecoration(itemDecoration);
-//
-//        SettingPreferences pref = SettingPreferences.getInstance(dataStore);
+
         MainViewModel mainViewModel = new ViewModelProvider(this, new MainViewModelFactory()).get(MainViewModel.class);
-//
+
         mainViewModel.user.observe(this, this::setUserData);
         mainViewModel.isLoading.observe(this, this::showLoading);
-//        mainViewModel.getThemeSettings().observe(this, isDarkModeActive -> {
-//            if (isDarkModeActive) {
-//                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-//            } else {
-//                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-//            }
-//        });
+        SettingPreferences preferences = new SettingPreferences(this);
+        viewModel = new ViewModelProvider(this, new SettingViewModelFactory(preferences)).get(SettingViewModel.class);
+        if (viewModel.isDarkMode()) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
+
     }
 
     @Override

@@ -31,11 +31,6 @@ public class MainViewModel extends ViewModel {
     private final MutableLiveData<String> _avatarUrl = new MutableLiveData<>();
     public final LiveData<String> avatarUrl = _avatarUrl;
 
-//    private final SettingPreferences pref;
-//
-//    public MainViewModel(SettingPreferences pref) {
-//        this.pref = pref;
-//    }
 
     public void findUser(String username) {
         getUser(username);
@@ -64,7 +59,5 @@ public class MainViewModel extends ViewModel {
             }
         });
     }
-//    public LiveData<Boolean> getThemeSettings() {
-//        return pref.getThemeSetting().asLiveData;
-//    }
+
 }
