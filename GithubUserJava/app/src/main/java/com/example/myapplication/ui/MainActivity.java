@@ -14,10 +14,7 @@ import android.content.Context;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.SearchView;
-import androidx.datastore.core.DataStore;
-import androidx.datastore.preferences.core.Preferences;
-import androidx.datastore.preferences.rxjava2.RxPreferenceDataStoreBuilder;
-import androidx.datastore.rxjava2.RxDataStore;
+
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -37,15 +34,15 @@ import java.util.stream.Collectors;
 public class MainActivity extends AppCompatActivity implements MenuItem.OnMenuItemClickListener {
 
     private ActivityMainBinding binding;
-    private final RxDataStore<Preferences> dataStore = new RxPreferenceDataStoreBuilder(MainActivity.this, "settings")
-            .build();
+//
+////    private final RxDataStore<Preferences> dataStore = new RxPreferenceDataStoreBuilder(MainActivity.this, "settings")
+//            .build();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         binding.rvItem.setLayoutManager(layoutManager);
         DividerItemDecoration itemDecoration = new DividerItemDecoration(this, layoutManager.getOrientation());
@@ -115,12 +112,12 @@ public class MainActivity extends AppCompatActivity implements MenuItem.OnMenuIt
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.favorite:
-                Toast.makeText(this, "Favorite", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "Favorite", Toast.LENGTH_SHORT).show();
                 Intent favoriteIntent = new Intent(this, FavoriteActivity.class);
                 startActivity(favoriteIntent);
                 return true;
             case R.id.setting:
-                Toast.makeText(this, "Setting", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "Setting", Toast.LENGTH_SHORT).show();
                 Intent settingIntent = new Intent(this, SettingActivity.class);
                 startActivity(settingIntent);
                 return true;

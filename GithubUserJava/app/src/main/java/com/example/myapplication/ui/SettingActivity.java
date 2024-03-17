@@ -1,63 +1,57 @@
 package com.example.myapplication.ui;
 
-import static androidx.datastore.preferences.PreferenceDataStoreDelegateKt.preferencesDataStore;
+import static android.app.PendingIntent.getActivity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.datastore.core.DataStore;
 import androidx.datastore.preferences.core.Preferences;
-
-import androidx.lifecycle.ViewModelProvider;
-
-import android.os.Bundle;
-import android.view.MenuItem;
-import android.widget.CompoundButton;
-
-//import com.example.myapplication.data.local.datastore.SettingPreferences;
+import com.example.myapplication.R;
+import com.example.myapplication.data.local.datastore.SettingPreferences;
 import com.example.myapplication.databinding.ActivitySettingBinding;
-//import com.example.myapplication.factory.SettingViewModelFactory;
-//import com.example.myapplication.viewmodel.SettingViewModel;
+import com.example.myapplication.factory.SettingViewModelFactory;
+import com.example.myapplication.viewmodel.SettingViewModel;
+import com.google.android.material.switchmaterial.SwitchMaterial;
 
 public class SettingActivity extends AppCompatActivity {
 
-
-    private ActivitySettingBinding binding;
-//    private final DataStore<Preferences> dataStore = preferencesDataStore(name = "settings");
+    private SettingViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivitySettingBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        setContentView(R.layout.activity_setting);
+        SettingPreferences preferences = new SettingPreferences(this);
+        viewModel = new ViewModelProvider(this, new SettingViewModelFactory(preferences)).get(SettingViewModel.class);
 
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
-//
-//        SettingPreferences pref = SettingPreferences.getInstance(dataStore);
-//        SettingViewModel viewModel = new ViewModelProvider(this, new SettingViewModelFactory(pref)).get(SettingViewModel.class);
-//
-//        viewModel.getThemeSettings().observe(this, isDarkModeActive -> {
-//            if (isDarkModeActive) {
-//                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-//                binding.switchTheme.setChecked(true);
-//            } else {
-//                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-//                binding.switchTheme.setChecked(false);
-//            }
-//        });
+        SwitchMaterial switchTheme = findViewById(R.id.switch_theme);
+        switchTheme.setChecked(viewModel.isDarkMode());
 
-        binding.switchTheme.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                binding.switchTheme.setChecked(isChecked);
-//                viewModel.saveThemeSetting(isChecked);
-            }
+        switchTheme.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            viewModel.setDarkMode(isChecked);
+            recreate();
         });
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    protected void onResume() {
+        super.onResume();
+        if (viewModel.isDarkMode()) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             finish();
             return true;
