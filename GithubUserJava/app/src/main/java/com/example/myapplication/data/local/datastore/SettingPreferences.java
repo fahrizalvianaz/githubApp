@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 public class SettingPreferences {
-    private SharedPreferences preferences;
+    private final SharedPreferences preferences;
 
     public SettingPreferences(Context context) {
         preferences = context.getSharedPreferences("settings", Context.MODE_PRIVATE);

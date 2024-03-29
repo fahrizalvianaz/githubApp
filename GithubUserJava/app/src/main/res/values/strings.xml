@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Society</string>
+    <string name="app_name">GithubUserJava</string>
     <string name="follower_tittle">Followers :</string>
     <string name="follower">followers</string>
     <string name="following_tittle">Following :</string>
